@@ -1,9 +1,19 @@
 package main
 
-import "fmt"
+import (
+		"fmt"
+		"github.com/beevik/ntp"
+		"time"
+)
 
-func  main ()  {
+func main() {
+		ntpTime, err := ntp.Time("time.apple.com")
+		if err != nil {
+				fmt.Println(err)
+		}
 
+		ntpTimeFormatted := ntpTime.Format(time.UnixDate)
 
-	fmt.Println("gfhj")
+		fmt.Printf("Unix Date Network time: %v\n", ntpTimeFormatted)
+	
 }
