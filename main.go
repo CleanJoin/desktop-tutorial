@@ -1,8 +1,9 @@
 package main
 
-
+import "Tutorial/pack"
 
 func main() {
-		package.lesson1()
-	
+
+	pack.Lesson1()
+
 }
