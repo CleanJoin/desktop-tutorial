@@ -12,10 +12,6 @@ func main() {
 
 	for i, dwarf := range s {
 		fmt.Println(string(pack.StringRePack(dwarf)), string(e[i]))
-		// if c := pack.StringRePack(dwarf); c != e[i] {
-		// 	fmt.Printf("bad count for %s: got %s expected %s", s, c, e)
-		// }
 	}
 
-	pack.StringEscape()
 }
