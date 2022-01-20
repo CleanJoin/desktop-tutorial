@@ -1,15 +1,14 @@
 package pack
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
 
-func StringRePack() {
+func StringRePack(s string) (e string) {
 	// s := "a4bc2d5e"
-	s := `wwrr\44\5\9`
-	b := ""
+	// fmt.Println(s)
+	var b strings.Builder
 	a := ""
 	d := ""
 	for i := 0; i < len(s); i++ {
@@ -17,33 +16,31 @@ func StringRePack() {
 			break
 		}
 		if _, err := strconv.Atoi(string(s[i])); err == nil {
-			fmt.Println(d, string(s[i]))
+			// fmt.Println(d, string(s[i]), string(s[i-2]))
 			if (d != string(s[i]) && (d != `\`)) || (d == string(s[i-2])) {
 
 				count, _ := strconv.Atoi(string(s[i]))
 				a = strings.Repeat(string(s[i-1]), count-1)
-				b = b + a
+				b.WriteString(a)
 			} else {
-				b = b + string(s[i])
+				b.WriteString(string(s[i]))
 
 			}
 
 		} else if (string(s[i]) != `\` && string(s[i]) != d) || (d == `\`) {
-			b = b + string(s[i])
+			b.WriteString(string(s[i]))
 
 		}
 		d = string(s[i])
 
 	}
-	if b == "" {
-		fmt.Printf("некорректная строка")
-	} else {
-		fmt.Println(b)
+	if b.String() == "" {
+		b.WriteString("некорректная строка")
 	}
 	// 	* "a4bc2d5e" => "aaaabccddddde"
 	// * "abcd" => "abcd"
 	// * "45" => "" (некорректная строка)
-
+	return b.String()
 }
 func StringEscape() {
 	// Дополнительное задание: поддержка escape - последовательности

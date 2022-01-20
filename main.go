@@ -2,9 +2,20 @@ package main
 
 import (
 	"Tutorial/pack"
+	"fmt"
 )
 
 func main() {
 	pack.Lesson1()
-	pack.StringRePack()
+	s := [6]string{"a4bc2d5e", "abcd", "45", `qwe\4\5`, `qwe\45`, `qwe\\5`}
+	e := [6]string{"aaaabccddddde", "abcd", "некорректная строка", `qwe45`, `qwe44444`, `qwe\\\\\`}
+
+	for i, dwarf := range s {
+		fmt.Println(string(pack.StringRePack(dwarf)), string(e[i]))
+		// if c := pack.StringRePack(dwarf); c != e[i] {
+		// 	fmt.Printf("bad count for %s: got %s expected %s", s, c, e)
+		// }
+	}
+
+	pack.StringEscape()
 }
