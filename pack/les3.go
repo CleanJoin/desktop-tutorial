@@ -59,7 +59,7 @@ func StrDeleteDict(cache map[string]int) (str []string) {
 		return kvs[i].v > kvs[j].v
 	})
 	fmt.Println(kvs)
-	for i := 0; i < 10; i++ {
+	for i := 0; i < len(kvs) && i < 10; i++ {
 		// fmt.Println(kvs[i].k)
 		str2 = append(str2, kvs[i].k)
 	}
