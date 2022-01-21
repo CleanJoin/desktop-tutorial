@@ -13,5 +13,6 @@ func main() {
 	for i, dwarf := range s {
 		fmt.Println(string(pack.StringRePack(dwarf)), string(e[i]))
 	}
+	pack.SubString()
 
 }
