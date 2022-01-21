@@ -11,7 +11,7 @@ func TestSubStr(t *testing.T) {
 
 	for i, dwarf := range s {
 		fmt.Println(string(StringRePack(dwarf)), string(dwarf[i]))
-		if c := StrDict(SubString(dwarf)); c != nil {
+		if c := StrToDict(RegString(dwarf)); c != nil {
 			t.Fatalf("bad count for %s: got %s expected %s", s, c, e)
 		}
 	}

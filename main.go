@@ -26,7 +26,7 @@ func main() {
 	сыч слон кот пес сон лом ров день ночь дочь корч 
 	клич  слон кот пес сон лом ров день ночь дочь корч сыч 
 	дичь слон кот пес сон лом ров день ночь дочь корч сыч клич`
-	d := pack.StrDict(pack.SubString(s))
+	d := pack.StrToDict(pack.RegString(s))
 	fmt.Println(d)
 
 }

@@ -7,23 +7,18 @@ import (
 	"strings"
 )
 
-func SubString(s string) (d []string) {
-	// s := `жопа жопа дрын ок ок сын сын& дин брат брат брат нет нет нет да да да! да жиза жиза жиза жиза про про про про сиси сиси,линивец,  линивец`
+func RegString(s string) (d []string) {
+
 	var re = regexp.MustCompile(`[[:punct:]]|[[:space:]]`)
 	str45 := re.ReplaceAllString(s, " ")
-	// fmt.Println(str45)
 	d = strings.Fields(str45)
-	// fmt.Println(d[5])
+
 	return d
 }
-func StrDict(d []string) []string {
+func StrToDict(d []string) []string {
 	sort.Strings(d)
-	// fmt.Println(d)
 	var s2 string
-	// intslice := []int{}
-	// stringslice := []string{}
 	cache := make(map[string]int)
-
 	count := 1
 	index := 0
 
@@ -38,14 +33,13 @@ func StrDict(d []string) []string {
 		}
 		s2 = s
 	}
-	strount := StrDeleteDict(cache)
-
+	delete(cache, "")
+	strount := SortWordCountsDict(cache)
 	return strount
 
 }
 
-func StrDeleteDict(cache map[string]int) (str []string) {
-	delete(cache, "")
+func SortWordCountsDict(cache map[string]int) (str []string) {
 	type kv struct {
 		k string
 		v int
@@ -60,7 +54,6 @@ func StrDeleteDict(cache map[string]int) (str []string) {
 	})
 	fmt.Println(kvs)
 	for i := 0; i < len(kvs) && i < 10; i++ {
-		// fmt.Println(kvs[i].k)
 		str2 = append(str2, kvs[i].k)
 	}
 	return str2
