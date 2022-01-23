@@ -1,60 +1,59 @@
 package pack
 
 import (
-	"fmt"
 	"regexp"
 	"sort"
 	"strings"
 )
 
-func RegString(s string) (d []string) {
-
-	var re = regexp.MustCompile(`[[:punct:]]|[[:space:]]`)
-	str45 := re.ReplaceAllString(s, " ")
-	d = strings.Fields(str45)
-
-	return d
+type wordseq struct {
+	word string
+	swq  int
 }
-func StrToDict(d []string) []string {
-	sort.Strings(d)
-	var s2 string
-	cache := make(map[string]int)
+
+func FormatTextToLowerAndReplace(text string) string {
+	lowertext := strings.ToLower(text)
+	var re = regexp.MustCompile(`[[:punct:]]|[[:space:]]`)
+	formattext := re.ReplaceAllString(lowertext, " ")
+
+	return formattext
+}
+func StrToDict(formattext string) []string {
+	newwods := strings.Fields(formattext)
+	sort.Strings(newwods)
+	var previousword string
+	wodscounter := make(map[string]int)
 	count := 1
-	index := 0
-
-	for _, s := range d {
-		if s == s2 {
+	for _, word := range newwods {
+		if word == previousword {
 			count++
-		} else if s != s2 {
-			cache[s2] = count
-
+		} else if word != previousword {
+			wodscounter[previousword] = count
 			count = 1
-			index++
 		}
-		s2 = s
+		previousword = word
 	}
-	delete(cache, "")
-	strount := SortWordCountsDict(cache)
+	delete(wodscounter, "")
+	strount := SortWordCountsFromDictToStruct(wodscounter)
 	return strount
 
 }
 
-func SortWordCountsDict(cache map[string]int) (str []string) {
-	type kv struct {
-		k string
-		v int
+func SortWordCountsFromDictToStruct(wodscounter map[string]int) []string {
+	numberofwords := make([]wordseq, 0, len(wodscounter))
+	for k, v := range wodscounter {
+		numberofwords = append(numberofwords, wordseq{k, v})
 	}
-	var str2 []string
-	kvs := make([]kv, 0, len(cache))
-	for k, v := range cache {
-		kvs = append(kvs, kv{k, v})
-	}
-	sort.Slice(kvs, func(i, j int) bool {
-		return kvs[i].v > kvs[j].v
+	sort.Slice(numberofwords, func(i, j int) bool {
+		return numberofwords[i].swq > numberofwords[j].swq
 	})
-	fmt.Println(kvs)
-	for i := 0; i < len(kvs) && i < 10; i++ {
-		str2 = append(str2, kvs[i].k)
+	readywords := OutputOfTenWords(numberofwords)
+	return readywords
+}
+func OutputOfTenWords(numberofwords []wordseq) []string {
+	var readywords []string
+	for i := 0; i < len(numberofwords) && i < 10; i++ {
+		readywords = append(readywords, numberofwords[i].word)
 	}
-	return str2
+	return readywords
 }
