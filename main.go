@@ -26,7 +26,7 @@ func main() {
 	сыч слон кот пес сон лом ров день ночь дочь корч 
 	клич  слон кот пес сон лом ров день ночь дочь корч сыч 
 	дичь слон кот пес сон лом ров день ночь дочь корч сыч клич`
-	d := pack.StrToDict(pack.FormatTextToLowerAndReplace(s))
+	d := pack.CountingWordsinDict(pack.FormatTextToLowerAndReplace(s))
 	fmt.Println(d)
 
 }

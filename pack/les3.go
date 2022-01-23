@@ -15,10 +15,9 @@ func FormatTextToLowerAndReplace(text string) string {
 	lowertext := strings.ToLower(text)
 	var re = regexp.MustCompile(`[[:punct:]]|[[:space:]]`)
 	formattext := re.ReplaceAllString(lowertext, " ")
-
 	return formattext
 }
-func StrToDict(formattext string) []string {
+func CountingWordsinDict(formattext string) []string {
 	newwods := strings.Fields(formattext)
 	sort.Strings(newwods)
 	var previousword string
@@ -27,13 +26,12 @@ func StrToDict(formattext string) []string {
 	for _, word := range newwods {
 		if word == previousword {
 			count++
-		} else if word != previousword {
+		} else if word != previousword && previousword != "" {
 			wodscounter[previousword] = count
 			count = 1
 		}
 		previousword = word
 	}
-	delete(wodscounter, "")
 	strount := SortWordCountsFromDictToStruct(wodscounter)
 	return strount
 
@@ -47,6 +45,7 @@ func SortWordCountsFromDictToStruct(wodscounter map[string]int) []string {
 	sort.Slice(numberofwords, func(i, j int) bool {
 		return numberofwords[i].swq > numberofwords[j].swq
 	})
+
 	readywords := OutputOfTenWords(numberofwords)
 	return readywords
 }
