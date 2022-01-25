@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type wordseq struct {
+type Wordseq struct {
 	word string
 	swq  int
 }
@@ -17,7 +17,7 @@ func FormatTextToLowerAndReplace(text string) string {
 	formattext := re.ReplaceAllString(lowertext, " ")
 	return formattext
 }
-func CountingWordsinDict(formattext string) []string {
+func CountingWordsinDict(formattext string) map[string]int {
 	newwods := strings.Fields(formattext)
 	sort.Strings(newwods)
 	var previousword string
@@ -32,24 +32,21 @@ func CountingWordsinDict(formattext string) []string {
 		}
 		previousword = word
 	}
-	strount := SortWordCountsFromDictToStruct(wodscounter)
-	return strount
+	return wodscounter
 
 }
 
-func SortWordCountsFromDictToStruct(wodscounter map[string]int) []string {
-	numberofwords := make([]wordseq, 0, len(wodscounter))
+func SortWordCountsFromDictToStruct(wodscounter map[string]int) []Wordseq {
+	numberofwords := make([]Wordseq, 0, len(wodscounter))
 	for k, v := range wodscounter {
-		numberofwords = append(numberofwords, wordseq{k, v})
+		numberofwords = append(numberofwords, Wordseq{k, v})
 	}
 	sort.Slice(numberofwords, func(i, j int) bool {
 		return numberofwords[i].swq > numberofwords[j].swq
 	})
-
-	readywords := OutputOfTenWords(numberofwords)
-	return readywords
+	return numberofwords
 }
-func OutputOfTenWords(numberofwords []wordseq) []string {
+func OutputOfTenWords(numberofwords []Wordseq) []string {
 	var readywords []string
 	for i := 0; i < len(numberofwords) && i < 10; i++ {
 		readywords = append(readywords, numberofwords[i].word)
