@@ -7,8 +7,8 @@ import (
 )
 
 type Wordseq struct {
-	word string
-	swq  int
+	Word string
+	Swq  int
 }
 
 func FormatTextToLowerAndReplace(text string) string {
@@ -36,20 +36,22 @@ func CountingWordsinDict(formattext string) map[string]int {
 
 }
 
-func SortWordCountsFromDictToStruct(wodscounter map[string]int) []Wordseq {
+func SortWordCountsFromDictToStruct(wodscounter map[string]int) []string {
 	numberofwords := make([]Wordseq, 0, len(wodscounter))
 	for k, v := range wodscounter {
 		numberofwords = append(numberofwords, Wordseq{k, v})
 	}
 	sort.Slice(numberofwords, func(i, j int) bool {
-		return numberofwords[i].swq > numberofwords[j].swq
+
+		return numberofwords[i].Swq > numberofwords[j].Swq
 	})
-	return numberofwords
+	Outwords := OutputOfTenWords(numberofwords)
+	return Outwords
 }
 func OutputOfTenWords(numberofwords []Wordseq) []string {
 	var readywords []string
 	for i := 0; i < len(numberofwords) && i < 10; i++ {
-		readywords = append(readywords, numberofwords[i].word)
+		readywords = append(readywords, numberofwords[i].Word)
 	}
 	return readywords
 }

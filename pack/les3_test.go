@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// +
 func TestFormatTextToLowerAndReplace(t *testing.T) {
 	intext := [2]string{`слон
 	кот слон
@@ -31,6 +32,7 @@ func TestFormatTextToLowerAndReplace(t *testing.T) {
 	}
 }
 
+// +
 func TestCountingWordsinDict(t *testing.T) {
 	intext := [1]string{`он лом ров день ночь дочь  сыч слон кот пес сон лом ров день ночь дочь корч   клич  слон кот пес сон лом ров день ночь дочь корч сыч   дичь слон кот пес сон лом ров день ночь дочь корч сыч клич`}
 	outdict := map[string]int{
@@ -61,6 +63,18 @@ func TestCountingWordsinDict(t *testing.T) {
 	}
 }
 
+func TestOutputOfTenWords(t *testing.T) {
+	inwords := []Wordseq{{Word: "день", Swq: 4}, {Word: "ночь", Swq: 4}, {Word: "дочь", Swq: 4}, {Word: "ров", Swq: 4}, {Word: "лом", Swq: 4}, {Word: "сон", Swq: 3}, {Word: "корч", Swq: 3}, {Word: "слон", Swq: 3}, {Word: "пес", Swq: 3}, {Word: "сон", Swq: 2}, {Word: "клич", Swq: 1}, {Word: "дичь", Swq: 1}}
+
+	outtext := []string{"день", "ночь", "дочь", "ров", "лом", "сон", "корч", "слон", "пес", "сон"}
+
+	c := OutputOfTenWords(inwords)
+	if reflect.DeepEqual(c, outtext) == false {
+		t.Fatalf("bad count for %q: got %q expected %q", inwords, c, outtext)
+	}
+
+}
+
 func TestSortWordCountsFromDictToStruct(t *testing.T) {
 	intext := map[string]int{
 		"день": 4,
@@ -77,23 +91,11 @@ func TestSortWordCountsFromDictToStruct(t *testing.T) {
 		"слон": 3,
 		"сон":  3,
 	}
-	outdict := make([]Wordseq, 0, len(intext))
-	outdict = []Wordseq{{word: "дочь", swq: 4}, {word: "лом", swq: 4}, {word: "ночь", swq: 4}, {word: "ров", swq: 4}, {word: "день", swq: 4}, {word: "сон", swq: 3}, {word: "кот", swq: 3}, {word: "корч", swq: 3}, {word: "слон", swq: 3}, {word: "пес", swq: 3}, {word: "клич", swq: 2}, {word: "дичь", swq: 1}, {word: "он", swq: 1}}
-
-	if c := SortWordCountsFromDictToStruct(intext); c != nil {
-		t.Fatalf("bad count for %s: got %s expected %s", s, c, e)
-
+	// outdict := make([]Wordseq, 0, len(intext))
+	// outdict := []Wordseq{{word: "день", swq: 4}, {word: "ночь", swq: 4}, {word: "дочь", swq: 4}, {word: "ров", swq: 4}, {word: "лом", swq: 4}, {word: "сон", swq: 3}, {word: "корч", swq: 3}, {word: "слон", swq: 3}, {word: "пес", swq: 3}, {word: "сон", swq: 2}, {word: "клич", swq: 1}, {word: "дичь", swq: 1}}
+	outtext := []string{"день", "ночь", "дочь", "ров", "лом", "сон", "корч", "слон", "пес", "сон"}
+	comparestruct := SortWordCountsFromDictToStruct(intext)
+	if reflect.DeepEqual(comparestruct, outtext) == false {
+		t.Fatalf("bad count for %q: got %q expected %q", intext, comparestruct, outtext)
 	}
 }
-
-// func TestOutputOfTenWords(t *testing.T) {
-// 	s := [2]string{`жопа жопа дрын ок ок сын сын дин брат брат брат нет нет нет да да да да жиза жиза жиза жиза про про про про сиси сиси линивец линивец`, `жопа жопа дрын ок ок сын сын& дин брат брат брат нет нет нет да да да! да жиза жиза жиза жиза про про про про сиси сиси,линивец,  линивец`}
-// 	e := []string{"да", "жиза", "про", "брат", "нет", "жопа", "ок", "сиси", "линивец", "дрын"}
-
-// 	for i, dwarf := range s {
-// 		fmt.Println(string(StringRePack(dwarf)), string(dwarf[i]))
-// 		if c := OutputOfTenWords(dwarf); c != nil {
-// 			t.Fatalf("bad count for %s: got %s expected %s", s, c, e)
-// 		}
-// 	}
-// }
