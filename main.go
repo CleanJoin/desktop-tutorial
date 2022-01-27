@@ -1,10 +1,5 @@
 package main
 
-import (
-	"Tutorial/pack"
-	"fmt"
-)
-
 type Wordseq2 struct {
 	Word string
 	Swq  int
@@ -51,23 +46,38 @@ func main() {
 	//e := pack.SortWordCountsFromDictToStruct(intext)
 
 	// outdict2 := []pack.Wordseq{{Word: "день", Swq: 4}, {Word: "ночь", Swq: 4}, {Word: "дочь", Swq: 4}, {Word: "ров", Swq: 4}, {Word: "лом", Swq: 4}, {Word: "сон", Swq: 3}, {Word: "корч", Swq: 3}, {Word: "слон", Swq: 3}, {Word: "пес", Swq: 3}, {Word: "сон", Swq: 2}, {Word: "клич", Swq: 1}, {Word: "дичь", Swq: 1}}
-	intext := map[string]int{
-		"день": 4,
-		"дичь": 1,
-		"дочь": 4,
-		"клич": 2,
-		"корч": 3,
-		"кот":  3,
-		"лом":  4,
-		"ночь": 4,
-		"он":   1,
-		"пес":  3,
-		"ров":  4,
-		"слон": 3,
-		"сон":  3,
-	}
-	ww := pack.SortWordCountsFromDictToStruct(intext)
-	// e := pack.OutputOfTenWords(outdict2)
-	fmt.Println(ww, "\n", "\n")
+	// intext := map[string]int{
+	// 	"день": 4,
+	// 	"дичь": 1,
+	// 	"дочь": 4,
+	// 	"клич": 2,
+	// 	"корч": 3,
+	// 	"кот":  3,
+	// 	"лом":  4,
+	// 	"ночь": 4,
+	// 	"он":   1,
+	// 	"пес":  3,
+	// 	"ров":  4,
+	// 	"слон": 3,
+	// 	"сон":  3,
+	// }
+	// ww := pack.SortWordCountsFromDictToStruct(intext)
+	// // e := pack.OutputOfTenWords(outdict2)
+	// fmt.Println(ww)
+
+	// закрытый канал
+	// pack.ReadChannelClose()
+	// pack.WriteChannelClose()
+	// Запись и чтение из канала
+	// pack.WriteReadChannel()
+	// var ch = make(chan int, 3)
+	// for i := 0; i < 3; i++ {
+	// 	ch <- i
+	// 	fmt.Println("Записанно!")
+	// }
+
+	// for j := 0; j < 4; j++ {
+	// 	fmt.Printf("Считаем: %v ", <-ch)
+	// }
 
 }

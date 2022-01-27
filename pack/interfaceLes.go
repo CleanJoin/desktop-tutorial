@@ -15,22 +15,15 @@ type AgePerson interface {
 }
 
 func (name Name) IsAdult() bool {
-	if name.Age >= 18 {
-		return true
-	}
-	return false
+
+	return name.Age >= 18
 
 }
 func (name *NameT) IsAdult() bool {
-	if name.Age >= 18 && name.Idiot == "YES" {
-		return true
-	}
-	return false
 
+	return name.Age >= 18 && name.Idiot == "YES"
 }
 func (name *Name) AgeSmall18() bool {
-	if name.Age < 18 {
-		return true
-	}
-	return false
+
+	return name.Age < 18
 }
