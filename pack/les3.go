@@ -45,6 +45,10 @@ func SortWordCountsFromDictToStruct(wodscounter map[string]int) []string {
 
 		return numberofwords[i].Swq > numberofwords[j].Swq
 	})
+	sort.SliceStable(numberofwords, func(i, j int) bool {
+
+		return numberofwords[i].Word < numberofwords[j].Word && numberofwords[i].Swq == numberofwords[j].Swq
+	})
 	Outwords := OutputOfTenWords(numberofwords)
 	return Outwords
 }

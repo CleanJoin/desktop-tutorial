@@ -79,7 +79,7 @@ func TestSortWordCountsFromDictToStruct(t *testing.T) {
 	intext := map[string]int{
 		"день": 4,
 		"дичь": 1,
-		"дочь": 4,
+		"дочь": 7,
 		"клич": 2,
 		"корч": 3,
 		"кот":  3,
@@ -93,7 +93,7 @@ func TestSortWordCountsFromDictToStruct(t *testing.T) {
 	}
 	// outdict := make([]Wordseq, 0, len(intext))
 	// outdict := []Wordseq{{word: "день", swq: 4}, {word: "ночь", swq: 4}, {word: "дочь", swq: 4}, {word: "ров", swq: 4}, {word: "лом", swq: 4}, {word: "сон", swq: 3}, {word: "корч", swq: 3}, {word: "слон", swq: 3}, {word: "пес", swq: 3}, {word: "сон", swq: 2}, {word: "клич", swq: 1}, {word: "дичь", swq: 1}}
-	outtext := []string{"день", "ночь", "дочь", "ров", "лом", "сон", "корч", "слон", "пес", "сон"}
+	outtext := []string{"дочь", "день", "лом", "ночь", "ров", "корч", "кот", "пес", "слон", "сон"}
 
 	comparestruct := SortWordCountsFromDictToStruct(intext)
 	if reflect.DeepEqual(comparestruct, outtext) == false {
